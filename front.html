@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="contain">
+    <input type="text" id="capt" readonly="readonly">
+    <div id="refresh">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaoGn7hoHsu-e2hZcqI9c54dxn7KWCVhw2uA&s" width="50px" alt="Refresh CAPTCHA" onclick="cap()">
+    </div>
+    <input type="text" id="textinput" placeholder="Enter CAPTCHA">
+    <button onclick="validcap()">Check</button>
+  </div>
+  <script type="text/javascript">
+    function cap() {
+      var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz';
+      var captcha = '';
+
+      for (var i = 0; i < 6; i++) {
+        captcha += alpha[Math.floor(Math.random() * alpha.length)];
+      }
+
+      document.getElementById("capt").value = captcha;
+    }
+
+    function validcap() {
+      var captchaValue = document.getElementById("capt").value;
+      var userInput = document.getElementById("textinput").value;
+
+      if (userInput === captchaValue) {
+        alert("Form is validated successfully");
+        return true;
+      } else {
+        alert("Please enter a valid CAPTCHA");
+        return false;
+      }
+    }
+
+    // Generate an initial CAPTCHA when the page loads
+    window.onload = cap;
+  </script>
+</body>
+</html>
